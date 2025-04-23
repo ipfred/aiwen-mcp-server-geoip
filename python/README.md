@@ -50,38 +50,4 @@ MCP Server for the Aiwen IP Location API
 ### 获取API key
 通过aiwen官网 获取api key： https://mall.ipplus360.com/pros/IPVFourGeoAPI
 
-### MCP HOST中配置使用
-#### cursor
-```json
-{
-    "mcpServers": {
-        "aiwen-iplocation": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "aiwen-mcp-server-geoip"
-            ],
-            "env": {
-                "AIWEN_API_KEY": "xxxxxx"
-            }
-        }
-    }
-}
-```
-#### vscode
-```json
-{
-    "mcpServers": {
-        "aiwen-iplocation": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "aiwen-mcp-server-geoip"
-            ],
-            "env": {
-                "AIWEN_API_KEY": "xxxxxx"
-            }
-        }
-    }
-}
-```
+

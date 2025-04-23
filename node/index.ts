@@ -60,13 +60,13 @@ const AIWEN_API_KEY = getApiKey();
 
 const IP_LOCATION_TOOL: Tool = {
   name: "aiwen_ip_location",
-  description: "IP定位 根据IP地址获取IP位置(定位到城市)、使用者、运营商、经纬度等信息 支持IPv4和IPv6",
+  description: "IP定位 根据IP地址获取IP位置(城市级)、使用者、运营商、经纬度等信息",
   inputSchema: {
     type: "object",
     properties: {
       ip: {
         type: "string",
-        description: "IP地址",
+        description: "IP地址 IPv4地址",
       }
     },
     required: ["ip"],

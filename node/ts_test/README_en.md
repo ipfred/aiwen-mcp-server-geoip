@@ -1,20 +1,18 @@
-# 埃文IP定位 MCP Server
+# Aiwen IP Location MCP Server
 
-## 介绍
-[埃文科技](https://www.ipplus360.com/) 是全球IP地址高精准实时定位技术领航者 全球网络空间地图大数据服务提供商
-
-埃文科技IP定位API已全面兼容MCP协议
+## Introduction
+[AiWen Tech](https://www.ipplus360.com/) is the global leader in high-precision real-time positioning technology for IP addresses and a global cyberspace map big data service provider
 
 MCP Server for the Aiwen IP Location API
 
-## 工具介绍
+## tools
 
-1. IP定位 `aiwen_ip_location`
-- 描述：根据请求的IP地址，返回该IP地址的详细信息，包括国家、省份、城市、运营商、使用者、经纬度等。
+1. IP location `aiwen_ip_location`
+- Description: Based on the requested IP address, return detailed information of the IP address, including country, province, city, IPS, user, longitude and latitude, etc.
 - 参数：
-  - `ip`：IP地址，必填IPv4
+  - `ip`：IP address，Required IPv4
 
-- 输出示例
+- Output example
 
 ```json
 {
@@ -45,12 +43,12 @@ MCP Server for the Aiwen IP Location API
 ```
 
 
-## 快速使用
+## Quick Use
 
-### 获取API key
-通过aiwen官网 获取api key： https://mall.ipplus360.com/pros/IPVFourGeoAPI
+### get API key
+get api key： https://mall.ipplus360.com/pros/IPVFourGeoAPI
 
-### MCP HOST中配置使用
+### MCP HOST step up
 #### cursor
 ```json
 {

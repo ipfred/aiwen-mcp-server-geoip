@@ -44,6 +44,10 @@ MCP Server for the Aiwen IP Location API
 }
 ```
 
+2.获取当前网络IP地址 根据当前网络IP地址获取位置信息 `user_network_ip`
+- 描述：基于IP的位置检测 获取用户当前网络的IP地址及定位信息
+- 参数 无
+- 输出结果 同上
 
 ## 快速使用
 

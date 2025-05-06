@@ -13,7 +13,7 @@ import fetch from "node-fetch";
 interface AiWenResponse {
   code: number;
   msg: string;
-  data?: string;
+  data: string;
 }
 
 
@@ -73,9 +73,19 @@ const IP_LOCATION_TOOL: Tool = {
   }
 }
 
+const USER_NETWORK_IP: Tool = {
+  name: "user_network_ip",
+  description: "获取当前网络IP地址 根据当前网络IP地址获取位置信息",
+  inputSchema: {
+    type: "object",
+    properties: {
+    },
+  }
+}
 
 const MAPS_TOOLS = [
   IP_LOCATION_TOOL,
+  USER_NETWORK_IP,
 ] as const;
 
 const API_URL = "https://api.ipplus360.com/ip/geo/v1";
@@ -99,7 +109,7 @@ async function handleIPLocation(
     return {
       content: [{
         type: "text",
-        text: `IP address query failed: ${data.msg || data.code}`
+        text: `IP address query failed: ${data.msg || data}`
       }],
       isError: true
     }
@@ -108,10 +118,30 @@ async function handleIPLocation(
   return {
     content: [{
       type: "text",
-      text: JSON.stringify(data.data, null, 2)
+      text: JSON.stringify(data, null, 2)
     }],
     isError: false
   }
+}
+
+async function handleNetworkIp(
+) {
+  const url = new URL("https://www.ipuu.net/ipuu/user/getIP");
+  url.searchParams.append("channel", "node_mcp");
+
+  const response = await fetch(url.toString());
+  const data = await response.json() as AiWenResponse;
+  if (data.code !== 200) {
+    return {
+      content: [{
+        type: "text",
+        text: `user network ip query failed: ${data.msg || data.code}`
+      }],
+      isError: true
+    }
+  }
+  const ip = data.data
+  return await handleIPLocation(ip);
 }
 
 
@@ -133,6 +163,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
   tools: MAPS_TOOLS,
 }));
 
+
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
   try {
     switch (request.params.name) {
@@ -142,6 +173,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           ip: string;
         };
         return await handleIPLocation(ip);
+      }
+
+      case "user_network_ip": {
+        return await handleNetworkIp();
       }
 
       default:

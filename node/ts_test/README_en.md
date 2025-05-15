@@ -8,7 +8,7 @@ MCP Server for the Aiwen IP Location API
 ## tools
 
 1. IP location `aiwen_ip_location`
-- Description: Based on the requested IP address, return detailed information of the IP address, including country, province, city, IPS, user, longitude and latitude, etc.
+- Description: Based on the requested IP address, return detailed information of the IP address, including country, province, city, IPS, owner, longitude and latitude, etc.
 - 参数：
   - `ip`：IP address，Required IPv4
 
@@ -41,7 +41,9 @@ MCP Server for the Aiwen IP Location API
   "coordsys": "WGS84"
 }
 ```
-
+2. User's current network address information `user_network_ip`
+- Description: IP-based location detection to obtain the IP address and location information of the user's current network
+- Output result Same as above
 
 ## Quick Use
 
@@ -83,3 +85,9 @@ get api key： https://mall.ipplus360.com/pros/IPVFourGeoAPI
     }
 }
 ```
+
+## use cases of aiwen geoip MCP Server?
+
+- Applications that require quick query of IP address geographic location
+- Network security and access control, verify IP source
+- Data analysis and scientific research related to IP geographical location

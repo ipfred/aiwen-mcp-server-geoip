@@ -66,7 +66,9 @@ MCP Server for the Aiwen IP Location API
                 "aiwen-mcp-server-geoip"
             ],
             "env": {
-                "AIWEN_API_KEY": "xxxxxx"
+                "AIWEN_API_KEY": "xxxxxx",
+                "IPV4_ACCURACY": "city",
+                "IPV6_ACCURACY": "city",
             }
         }
     }
@@ -83,9 +85,17 @@ MCP Server for the Aiwen IP Location API
                 "aiwen-mcp-server-geoip"
             ],
             "env": {
-                "AIWEN_API_KEY": "xxxxxx"
+                "AIWEN_API_KEY": "xxxxxx",
+                "IPV4_ACCURACY": "city",
+                "IPV6_ACCURACY": "city",
             }
         }
     }
 }
 ```
+
+## 应用场景
+
+- 需要快速查询 IP 地址地理位置的应用  
+- 网络安全和访问控制 ，验证IP来源
+- IP地理位置相关的数据分析，科学研究

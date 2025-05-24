@@ -63,7 +63,7 @@ const { v4_acc: IPV4_ACCURACY, v6_acc: IPV6_ACCURACY } = getLocationAccuracy();
 
 const IP_LOCATION_TOOL: Tool = {
   name: "aiwen_ip_location",
-  description: "IP定位 根据IP地址获取IP位置(支持城市、区县、街道三种精度)、经纬度、所属机构、运营商等信息",
+  description: "IP定位 根据IP地址获取IP位置 大洲、国家、省份、城市(支持城市、区县、街道三种精度)、经纬度、所属机构、运营商、精度等信息",
   inputSchema: {
     type: "object",
     properties: {
@@ -78,7 +78,7 @@ const IP_LOCATION_TOOL: Tool = {
 
 const USER_NETWORK_IP: Tool = {
   name: "user_network_ip",
-  description: "获取当前网络IP地址 根据当前网络IP地址获取位置信息",
+  description: "获取当前网络IP地址和IP位置信息(支持城市、区县、街道三种精度),支持IPv4和IPv6",
   inputSchema: {
     type: "object",
     properties: {},
@@ -87,7 +87,7 @@ const USER_NETWORK_IP: Tool = {
 
 const IP_USAGE_SCENE: Tool = {
   name: "ip_usage_scene",
-  description: "根据IP地址获取IP使用场景 输出包括保留IP、未分配IP、组织机构、移动网络、家庭宽带、数据中心、企业专线、CDN、卫星通信、交换中心、Anycast等网络应用场景",
+  description: "IP应用场景 根据IP地址获取IP应用场景 输出包括保留IP、未分配IP、组织机构、移动网络、家庭宽带、数据中心、企业专线、CDN、卫星通信、交换中心、Anycast等网络应用场景",
   inputSchema: {
     type: "object",
     properties: {
@@ -103,7 +103,7 @@ const IP_USAGE_SCENE: Tool = {
 // ip_whois_info
 const IP_WHOIS_INFO: Tool = {
   name: "ip_whois_info",
-  description: "查询IP地址Whois注册信息 返回IP所属网段范围、所属机构名称、技术联系人、管理员等信息",
+  description: "whois信息 根据IP地址查询Whois注册信息 获取IP所属网段范围、所属机构名称、技术联系人、管理员等信息",
   inputSchema: {
     type: "object",
     properties: {
@@ -119,7 +119,7 @@ const IP_WHOIS_INFO: Tool = {
 // ip_as_mapping
 const IP_AS_MAPPING: Tool = {
   name: "ip_as_mapping",
-  description: "查询IP地址AS号(自治域号)信息 返回AS编号、AS名称、AS场景、AS所属的行业等",
+  description: "查询IP地址AS号(自治域号)信息",
   inputSchema: {
     type: "object",
     properties: {
@@ -135,7 +135,7 @@ const IP_AS_MAPPING: Tool = {
 // ip_host_info
 const IP_HOST_INFO: Tool = {
   name: "ip_host_info",
-  description: "查询IP地址的宿主信息 返回IP的自治域编号(AS Number)、AS名称、运营商、所属机构等归属属性",
+  description: "IP宿主信息 根据IP地址查询IP的自治域编号(AS Number)、AS名称、运营商、所属机构等归属属性",
   inputSchema: {
     type: "object",
     properties: {
@@ -151,7 +151,7 @@ const IP_HOST_INFO: Tool = {
 // ip_risk_portrait
 const IP_RISK_PORTRAIT: Tool = {
   name: "ip_risk_portrait",
-  description: "查询IP地址风险画像 识别VPN、代理、秒拨、数据中心、Tor节点、端口扫描、暴力破解等高风险行为,输出风险评分、分级结果、IP位置等信息",
+  description: "IP风险画像 根据IP地址获取IP风险画像 识别VPN、代理、秒拨、数据中心、Tor节点、端口扫描、暴力破解等高风险行为,输出风险评分、分级结果、IP位置等信息",
   inputSchema: {
     type: "object",
     properties: {
@@ -167,7 +167,7 @@ const IP_RISK_PORTRAIT: Tool = {
 // ip_identity_check
 const IP_IDENTITY_CHECK: Tool = {
   name: "ip_identity_check",
-  description: "根据IP地址判断访问者是否为真实用户或机器流量 返回真人概率(real_person_rate)、秒播概率(mb_rate)",
+  description: "IP真假人 根据IP地址判断访问者是否为真实用户或机器流量 返回真人概率(real_person_rate)、秒播概率(mb_rate)",
   inputSchema: {
     type: "object",
     properties: {

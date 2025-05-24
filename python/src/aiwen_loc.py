@@ -32,9 +32,9 @@ def get_location_accuracy():
     if not v6_acc:
         print("IPV6_ACCURACY environment use default `city`")
         v6_acc = 'city'
-    if v4_acc not in ('city', 'district', 'address'):
+    if v4_acc not in ('city', 'district', 'street'):
         exit("Invalid IPV4_ACCURACY. Valid options are: city, district, street")
-    if v6_acc not in ('city', 'district', 'address'):
+    if v6_acc not in ('city', 'district', 'street'):
         exit("Invalid IPV6_ACCURACY. Valid options are: city, district, street")
     return v4_acc, v6_acc
 
@@ -154,7 +154,7 @@ class AiwenClient:
 aw_client = AiwenClient(api_host=api_host, api_key=AIWEN_API_KEY)
 
 
-@mcp.tool(description="IP定位 根据IP地址获取IP位置(支持城市、区县、街道三种精度)、经纬度、所属机构、运营商等信息")
+@mcp.tool(description="IP定位 根据IP地址获取IP位置 大洲、国家、省份、城市(支持城市、区县、街道三种精度)、经纬度、所属机构、运营商、精度等信息")
 async def aiwen_ip_location(
     ip: str = Field(description="IP地址 IPv4或IPv6")
     ):
@@ -172,7 +172,7 @@ async def aiwen_ip_location(
 
 
 # 获取用户当前访问网络的IP地址
-@mcp.tool(description="获取当前网络IP地址 根据当前网络IP地址获取位置信息")
+@mcp.tool(description="获取当前网络IP地址和IP位置信息(支持城市、区县、街道三种精度),支持IPv4和IPv6")
 async def user_network_ip():
     try:
         # step1
@@ -193,7 +193,7 @@ async def user_network_ip():
         raise Exception(f"Failed to parse reponse: {str(e)}") from e
 
 # 获取IP应用场景
-@mcp.tool(description="根据IP地址获取IP使用场景 输出包括保留IP、未分配IP、组织机构、移动网络、家庭宽带、数据中心、企业专线、CDN、卫星通信、交换中心、Anycast等网络应用场景")
+@mcp.tool(description="IP应用场景 根据IP地址获取IP应用场景 输出包括保留IP、未分配IP、组织机构、移动网络、家庭宽带、数据中心、企业专线、CDN、卫星通信、交换中心、Anycast等网络应用场景")
 async def ip_usage_scene(ip: str = Field(description="IP地址 IPv4或IPv6")):
     try:
         resp = await aw_client.get_ip_scene(ip)
@@ -204,7 +204,7 @@ async def ip_usage_scene(ip: str = Field(description="IP地址 IPv4或IPv6")):
         raise Exception(f"Failed to parse reponse: {str(e)}") from e
 
 # 获取IP WHOIS
-@mcp.tool(description="查询IP地址Whois注册信息 返回IP所属网段范围、所属机构名称、技术联系人、管理员等信息")
+@mcp.tool(description="whois信息 根据IP地址查询Whois注册信息 获取IP所属网段范围、所属机构名称、技术联系人、管理员等信息")
 async def ip_whois_info(ip: str = Field(description="IP地址 IPv4")):
     try:
         resp = await aw_client.get_ip_whois(ip)
@@ -216,7 +216,7 @@ async def ip_whois_info(ip: str = Field(description="IP地址 IPv4")):
 
 
 # 获取AS WHOIS
-@mcp.tool(description="查询IP地址AS号(自治域号)信息 返回AS编号、AS名称、AS场景、AS所属的行业等")
+@mcp.tool(description="查询IP地址AS号(自治域号)信息")
 async def ip_as_mapping(ip: str = Field(description="IP地址 IPv4")):
     try:
         resp = await aw_client.get_as_whois(ip)
@@ -227,7 +227,7 @@ async def ip_as_mapping(ip: str = Field(description="IP地址 IPv4")):
         raise Exception(f"Failed to parse reponse: {str(e)}") from e
 
 # 宿主信息
-@mcp.tool(description="查询IP地址的宿主信息 返回IP的自治域编号(AS Number)、AS名称、运营商、所属机构等归属属")
+@mcp.tool(description="IP宿主信息 根据IP地址查询IP的自治域编号(AS Number)、AS名称、运营商、所属机构等归属属性")
 async def ip_host_info(ip: str = Field(description="IP地址 IPv4")):
     try:
         resp = await aw_client.get_ip_host(ip)
@@ -238,7 +238,7 @@ async def ip_host_info(ip: str = Field(description="IP地址 IPv4")):
         raise Exception(f"Failed to parse reponse: {str(e)}") from e
     
 # 风险画像 
-@mcp.tool(description="查询IP地址风险画像 识别VPN、代理、秒拨、数据中心、Tor节点、端口扫描、暴力破解等高风险行为,输出风险评分、分级结果、IP位置等信息")
+@mcp.tool(description="IP风险画像 根据IP地址获取IP风险画像 识别VPN、代理、秒拨、数据中心、Tor节点、端口扫描、暴力破解等高风险行为,输出风险评分、分级结果、IP位置等信息")
 async def ip_risk_portrait(ip: str = Field(description="IP地址 IPv4")):
     try:
         return await aw_client.get_ip_portrait(ip)
@@ -248,7 +248,7 @@ async def ip_risk_portrait(ip: str = Field(description="IP地址 IPv4")):
         raise Exception(f"Failed to parse reponse: {str(e)}") from e
     
 # IP 真假人
-@mcp.tool(description="根据IP地址判断访问者是否为真实用户或机器流量 返回真人概率(real_person_rate)、秒播概率(mb_rate)")
+@mcp.tool(description="IP真假人 根据IP地址判断访问者是否为真实用户或机器流量 返回真人概率(real_person_rate)、秒播概率(mb_rate)")
 async def ip_identity_check(ip: str = Field(description="IP地址 IPv4")):
     try:
         return await aw_client.get_ip_person(ip)
